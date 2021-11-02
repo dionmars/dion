@@ -1,0 +1,251 @@
+{
+  "contractName": "ILendingPoolAddressesProvider",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "getLendingPool",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.7+commit.e28d00a7\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"getLendingPool\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/aave/ILendingPoolAddressProvider.sol\":\"ILendingPoolAddressesProvider\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/aave/ILendingPoolAddressProvider.sol\":{\"keccak256\":\"0xff19529cdec84a2805774df51b041f90c595d429ba8af2b3654be6d7a7729680\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f77a7563cae76bf3d37c3bb361a8795503fa97c1e8031d0e59fcfc823865845e\",\"dweb:/ipfs/QmavFohTQcn8EAmBS3T95h26uYaH6hT3G31m3bzVJiWLqV\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.7.0 <0.9.0;\n\ninterface ILendingPoolAddressesProvider {\n  function getLendingPool() external view returns (address);\n}\n",
+  "sourcePath": "/home/dionmars/Desktop/dion/contracts/interfaces/aave/ILendingPoolAddressProvider.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interfaces/aave/ILendingPoolAddressProvider.sol",
+    "exportedSymbols": {
+      "ILendingPoolAddressesProvider": [
+        2623
+      ]
+    },
+    "id": 2624,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2617,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.7",
+          ".0",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:31:20"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 2623,
+        "linearizedBaseContracts": [
+          2623
+        ],
+        "name": "ILendingPoolAddressesProvider",
+        "nameLocation": "75:29:20",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "0261bf8b",
+            "id": 2622,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getLendingPool",
+            "nameLocation": "118:14:20",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2618,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "132:2:20"
+            },
+            "returnParameters": {
+              "id": 2621,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2620,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2622,
+                  "src": "158:7:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2619,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "158:7:20",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "157:9:20"
+            },
+            "scope": 2623,
+            "src": "109:58:20",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2624,
+        "src": "65:104:20",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:138:20"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/interfaces/aave/ILendingPoolAddressProvider.sol",
+    "exportedSymbols": {
+      "ILendingPoolAddressesProvider": [
+        2623
+      ]
+    },
+    "id": 2624,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2617,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.7",
+          ".0",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:31:20"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 2623,
+        "linearizedBaseContracts": [
+          2623
+        ],
+        "name": "ILendingPoolAddressesProvider",
+        "nameLocation": "75:29:20",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "0261bf8b",
+            "id": 2622,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getLendingPool",
+            "nameLocation": "118:14:20",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2618,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "132:2:20"
+            },
+            "returnParameters": {
+              "id": 2621,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2620,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2622,
+                  "src": "158:7:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2619,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "158:7:20",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "157:9:20"
+            },
+            "scope": 2623,
+            "src": "109:58:20",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2624,
+        "src": "65:104:20",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:138:20"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.7+commit.e28d00a7.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-10-23T17:57:03.737Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

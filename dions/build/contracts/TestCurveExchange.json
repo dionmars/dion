@@ -1,0 +1,2228 @@
+{
+  "contractName": "TestCurveExchange",
+  "abi": [
+    {
+      "gas": 10205,
+      "inputs": [
+        {
+          "name": "i",
+          "type": "uint256"
+        },
+        {
+          "name": "j",
+          "type": "uint256"
+        }
+      ],
+      "name": "swap",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6101ba56600436101561000d576101ab565b600035601c526f7fffffffffffffffffffffffffffffff604052600051346101b15763d96073cf8114156101a957736b175474e89094c44da98b954eedeac495271d0f6101405273a0b86991c6218b36c1d19d4a2e9eb0ce3606eb486101605273dac17f958d2ee523a2206206994597c13d831ec761018052602061024060246370a082316101c052306101e0526101dc61014060043560038110156101b15760200201515afa156101b157601f3d11156101b157600050610240516101a0526020610260604463095ea7b36101c05273bebc44782c7db0a1a60cb6fe97d0b483032ff1c76101e0526101a051610200526101dc600061014060043560038110156101b15760200201515af1156101b157601f3d11156101b1576000506102605073bebc44782c7db0a1a60cb6fe97d0b483032ff1c73b156101b157600060006084633df021246101c05260043560405181116101b1576101e05260243560405181116101b157610200526101a051610220526001610240526101dc600073bebc44782c7db0a1a60cb6fe97d0b483032ff1c75af1156101b157005b505b60006000fd5b600080fd5b6100046101ba036100046000396100046101ba036000f3",
+  "deployedBytecode": "0x600436101561000d576101ab565b600035601c526f7fffffffffffffffffffffffffffffff604052600051346101b15763d96073cf8114156101a957736b175474e89094c44da98b954eedeac495271d0f6101405273a0b86991c6218b36c1d19d4a2e9eb0ce3606eb486101605273dac17f958d2ee523a2206206994597c13d831ec761018052602061024060246370a082316101c052306101e0526101dc61014060043560038110156101b15760200201515afa156101b157601f3d11156101b157600050610240516101a0526020610260604463095ea7b36101c05273bebc44782c7db0a1a60cb6fe97d0b483032ff1c76101e0526101a051610200526101dc600061014060043560038110156101b15760200201515af1156101b157601f3d11156101b1576000506102605073bebc44782c7db0a1a60cb6fe97d0b483032ff1c73b156101b157600060006084633df021246101c05260043560405181116101b1576101e05260243560405181116101b157610200526101a051610220526001610240526101dc600073bebc44782c7db0a1a60cb6fe97d0b483032ff1c75af1156101b157005b505b60006000fd5b600080fd",
+  "deployedSourceMap": "-1:-1:0:-;;;;;:::-;;:::-;:::-;;;;;;;;;;;;:::-;524:251;;;;;:::-;581:6;560:27;-1:-1;581:6;560:27;-1:-1;581:6;560:27;-1:-1;605:32;;;-1:-1;;;632:4;-1:-1;;;611:6;618:1;611:9;;;;;;:::-;;;;605:32;;;;;:::-;;;;;;:::-;;;;-1:-1;590:47;524:251;641:42;;;-1:-1;;;666:11;-1:-1;;679:3;-1:-1;;;;641:42;647:6;654:1;647:9;;;;;;:::-;;;;641:42;;;;;:::-;;;;;;:::-;;524:251;641:42;524:251;698:11;687:88;;;:::-;;;;-1:-1;;;733:1;725:18;;;;;;:::-;-1:-1;;753:1;745:18;;;;;;:::-;-1:-1;;765:3;-1:-1;;;770:1;-1:-1;;;687:88;698:11;687:88;;;;:::-;524:251;:::-;-1:-1;:::-;;;;:::-;;;;",
+  "source": "# @version ^0.2\nfrom vyper.interfaces import ERC20\n\ninterface StableSwap:\n  def exchange(i: int128, j: int128, dx: uint256, min_dy: uint256): nonpayable\n\n# StableSwap3Pool\nSTABLE_SWAP: constant(address) = 0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7\n\nDAI: constant(address) = 0x6B175474E89094C44Da98b954EedeAC495271d0F\nUSDC: constant(address) = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\nUSDT: constant(address) = 0xdAC17F958D2ee523a2206206994597C13D831ec7\n\nTOKENS: constant(address[3]) = [\n  DAI,\n  USDC,\n  USDT\n]\n\n@external\ndef swap(i: uint256, j: uint256):\n  tokens: address[3] = TOKENS\n  bal: uint256 = ERC20(tokens[i]).balanceOf(self)\n\n  ERC20(tokens[i]).approve(STABLE_SWAP, bal)\n\n  StableSwap(STABLE_SWAP).exchange(\n    convert(i, int128), convert(j, int128), bal, 1\n  )\n",
+  "sourcePath": "/home/dionmars/Desktop/dion/contracts/TestCurveExchange.vy",
+  "ast": {
+    "ast_type": "Module",
+    "body": [
+      {
+        "alias": null,
+        "ast_type": "ImportFrom",
+        "col_offset": 0,
+        "end_col_offset": 34,
+        "end_lineno": 2,
+        "level": 0,
+        "lineno": 2,
+        "module": "vyper.interfaces",
+        "name": "ERC20",
+        "node_id": 1,
+        "src": "16:34:0"
+      },
+      {
+        "ast_type": "InterfaceDef",
+        "body": [
+          {
+            "args": {
+              "args": [
+                {
+                  "annotation": {
+                    "ast_type": "Name",
+                    "col_offset": 18,
+                    "end_col_offset": 24,
+                    "end_lineno": 5,
+                    "id": "int128",
+                    "lineno": 5,
+                    "node_id": 7,
+                    "src": "92:6:0"
+                  },
+                  "arg": "i",
+                  "ast_type": "arg",
+                  "col_offset": 15,
+                  "end_col_offset": 24,
+                  "end_lineno": 5,
+                  "lineno": 5,
+                  "node_id": 6,
+                  "src": "89:9:0"
+                },
+                {
+                  "annotation": {
+                    "ast_type": "Name",
+                    "col_offset": 29,
+                    "end_col_offset": 35,
+                    "end_lineno": 5,
+                    "id": "int128",
+                    "lineno": 5,
+                    "node_id": 10,
+                    "src": "103:6:0"
+                  },
+                  "arg": "j",
+                  "ast_type": "arg",
+                  "col_offset": 26,
+                  "end_col_offset": 35,
+                  "end_lineno": 5,
+                  "lineno": 5,
+                  "node_id": 9,
+                  "src": "100:9:0"
+                },
+                {
+                  "annotation": {
+                    "ast_type": "Name",
+                    "col_offset": 41,
+                    "end_col_offset": 48,
+                    "end_lineno": 5,
+                    "id": "uint256",
+                    "lineno": 5,
+                    "node_id": 13,
+                    "src": "115:7:0"
+                  },
+                  "arg": "dx",
+                  "ast_type": "arg",
+                  "col_offset": 37,
+                  "end_col_offset": 48,
+                  "end_lineno": 5,
+                  "lineno": 5,
+                  "node_id": 12,
+                  "src": "111:11:0"
+                },
+                {
+                  "annotation": {
+                    "ast_type": "Name",
+                    "col_offset": 58,
+                    "end_col_offset": 65,
+                    "end_lineno": 5,
+                    "id": "uint256",
+                    "lineno": 5,
+                    "node_id": 16,
+                    "src": "132:7:0"
+                  },
+                  "arg": "min_dy",
+                  "ast_type": "arg",
+                  "col_offset": 50,
+                  "end_col_offset": 65,
+                  "end_lineno": 5,
+                  "lineno": 5,
+                  "node_id": 15,
+                  "src": "124:15:0"
+                }
+              ],
+              "ast_type": "arguments",
+              "col_offset": 15,
+              "default": null,
+              "defaults": [],
+              "end_col_offset": 65,
+              "end_lineno": 5,
+              "lineno": 5,
+              "node_id": 5,
+              "src": "89:50:0"
+            },
+            "ast_type": "FunctionDef",
+            "body": [
+              {
+                "ast_type": "Expr",
+                "col_offset": 68,
+                "end_col_offset": 78,
+                "end_lineno": 5,
+                "lineno": 5,
+                "node_id": 18,
+                "src": "142:10:0",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 68,
+                  "end_col_offset": 78,
+                  "end_lineno": 5,
+                  "id": "nonpayable",
+                  "lineno": 5,
+                  "node_id": 19,
+                  "src": "142:10:0"
+                }
+              }
+            ],
+            "col_offset": 2,
+            "decorator_list": [],
+            "doc_string": null,
+            "end_col_offset": 78,
+            "end_lineno": 5,
+            "lineno": 5,
+            "name": "exchange",
+            "node_id": 4,
+            "pos": null,
+            "returns": null,
+            "src": "76:76:0"
+          }
+        ],
+        "col_offset": 0,
+        "end_col_offset": 78,
+        "end_lineno": 5,
+        "lineno": 4,
+        "name": "StableSwap",
+        "node_id": 3,
+        "src": "52:100:0"
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 22,
+              "end_col_offset": 29,
+              "end_lineno": 8,
+              "id": "address",
+              "lineno": 8,
+              "node_id": 27,
+              "src": "194:7:0"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 13,
+          "end_col_offset": 30,
+          "end_lineno": 8,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 13,
+            "end_col_offset": 21,
+            "end_lineno": 8,
+            "id": "constant",
+            "lineno": 8,
+            "node_id": 25,
+            "src": "185:8:0"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 8,
+          "node_id": 24,
+          "src": "185:17:0"
+        },
+        "ast_type": "AnnAssign",
+        "col_offset": 0,
+        "end_col_offset": 75,
+        "end_lineno": 8,
+        "lineno": 8,
+        "node_id": 21,
+        "simple": 1,
+        "src": "172:75:0",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 11,
+          "end_lineno": 8,
+          "id": "STABLE_SWAP",
+          "lineno": 8,
+          "node_id": 22,
+          "src": "172:11:0"
+        },
+        "value": {
+          "ast_type": "Hex",
+          "col_offset": 33,
+          "end_col_offset": 75,
+          "end_lineno": 8,
+          "lineno": 8,
+          "node_id": 29,
+          "src": "205:42:0",
+          "value": "0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7"
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 14,
+              "end_col_offset": 21,
+              "end_lineno": 10,
+              "id": "address",
+              "lineno": 10,
+              "node_id": 36,
+              "src": "263:7:0"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 5,
+          "end_col_offset": 22,
+          "end_lineno": 10,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 5,
+            "end_col_offset": 13,
+            "end_lineno": 10,
+            "id": "constant",
+            "lineno": 10,
+            "node_id": 34,
+            "src": "254:8:0"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 10,
+          "node_id": 33,
+          "src": "254:17:0"
+        },
+        "ast_type": "AnnAssign",
+        "col_offset": 0,
+        "end_col_offset": 67,
+        "end_lineno": 10,
+        "lineno": 10,
+        "node_id": 30,
+        "simple": 1,
+        "src": "249:67:0",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 3,
+          "end_lineno": 10,
+          "id": "DAI",
+          "lineno": 10,
+          "node_id": 31,
+          "src": "249:3:0"
+        },
+        "value": {
+          "ast_type": "Hex",
+          "col_offset": 25,
+          "end_col_offset": 67,
+          "end_lineno": 10,
+          "lineno": 10,
+          "node_id": 38,
+          "src": "274:42:0",
+          "value": "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 15,
+              "end_col_offset": 22,
+              "end_lineno": 11,
+              "id": "address",
+              "lineno": 11,
+              "node_id": 45,
+              "src": "332:7:0"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 6,
+          "end_col_offset": 23,
+          "end_lineno": 11,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 6,
+            "end_col_offset": 14,
+            "end_lineno": 11,
+            "id": "constant",
+            "lineno": 11,
+            "node_id": 43,
+            "src": "323:8:0"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 11,
+          "node_id": 42,
+          "src": "323:17:0"
+        },
+        "ast_type": "AnnAssign",
+        "col_offset": 0,
+        "end_col_offset": 68,
+        "end_lineno": 11,
+        "lineno": 11,
+        "node_id": 39,
+        "simple": 1,
+        "src": "317:68:0",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 4,
+          "end_lineno": 11,
+          "id": "USDC",
+          "lineno": 11,
+          "node_id": 40,
+          "src": "317:4:0"
+        },
+        "value": {
+          "ast_type": "Hex",
+          "col_offset": 26,
+          "end_col_offset": 68,
+          "end_lineno": 11,
+          "lineno": 11,
+          "node_id": 47,
+          "src": "343:42:0",
+          "value": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 15,
+              "end_col_offset": 22,
+              "end_lineno": 12,
+              "id": "address",
+              "lineno": 12,
+              "node_id": 54,
+              "src": "401:7:0"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 6,
+          "end_col_offset": 23,
+          "end_lineno": 12,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 6,
+            "end_col_offset": 14,
+            "end_lineno": 12,
+            "id": "constant",
+            "lineno": 12,
+            "node_id": 52,
+            "src": "392:8:0"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 12,
+          "node_id": 51,
+          "src": "392:17:0"
+        },
+        "ast_type": "AnnAssign",
+        "col_offset": 0,
+        "end_col_offset": 68,
+        "end_lineno": 12,
+        "lineno": 12,
+        "node_id": 48,
+        "simple": 1,
+        "src": "386:68:0",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 4,
+          "end_lineno": 12,
+          "id": "USDT",
+          "lineno": 12,
+          "node_id": 49,
+          "src": "386:4:0"
+        },
+        "value": {
+          "ast_type": "Hex",
+          "col_offset": 26,
+          "end_col_offset": 68,
+          "end_lineno": 12,
+          "lineno": 12,
+          "node_id": 56,
+          "src": "412:42:0",
+          "value": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Subscript",
+              "col_offset": 17,
+              "end_col_offset": 27,
+              "end_lineno": 14,
+              "lineno": 14,
+              "node_id": 63,
+              "slice": {
+                "ast_type": "Index",
+                "col_offset": 25,
+                "end_col_offset": 26,
+                "end_lineno": 14,
+                "lineno": 14,
+                "node_id": 66,
+                "src": "481:1:0",
+                "value": {
+                  "ast_type": "Int",
+                  "col_offset": 25,
+                  "end_col_offset": 26,
+                  "end_lineno": 14,
+                  "lineno": 14,
+                  "node_id": 67,
+                  "src": "481:1:0",
+                  "value": 3
+                }
+              },
+              "src": "473:10:0",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 17,
+                "end_col_offset": 24,
+                "end_lineno": 14,
+                "id": "address",
+                "lineno": 14,
+                "node_id": 64,
+                "src": "473:7:0"
+              }
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 8,
+          "end_col_offset": 28,
+          "end_lineno": 14,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 8,
+            "end_col_offset": 16,
+            "end_lineno": 14,
+            "id": "constant",
+            "lineno": 14,
+            "node_id": 61,
+            "src": "464:8:0"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 14,
+          "node_id": 60,
+          "src": "464:20:0"
+        },
+        "ast_type": "AnnAssign",
+        "col_offset": 0,
+        "end_col_offset": 1,
+        "end_lineno": 18,
+        "lineno": 14,
+        "node_id": 57,
+        "simple": 1,
+        "src": "456:56:0",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 6,
+          "end_lineno": 14,
+          "id": "TOKENS",
+          "lineno": 14,
+          "node_id": 58,
+          "src": "456:6:0"
+        },
+        "value": {
+          "ast_type": "List",
+          "col_offset": 31,
+          "elements": [
+            {
+              "ast_type": "Name",
+              "col_offset": 2,
+              "end_col_offset": 5,
+              "end_lineno": 15,
+              "id": "DAI",
+              "lineno": 15,
+              "node_id": 70,
+              "src": "491:3:0"
+            },
+            {
+              "ast_type": "Name",
+              "col_offset": 2,
+              "end_col_offset": 6,
+              "end_lineno": 16,
+              "id": "USDC",
+              "lineno": 16,
+              "node_id": 72,
+              "src": "498:4:0"
+            },
+            {
+              "ast_type": "Name",
+              "col_offset": 2,
+              "end_col_offset": 6,
+              "end_lineno": 17,
+              "id": "USDT",
+              "lineno": 17,
+              "node_id": 74,
+              "src": "506:4:0"
+            }
+          ],
+          "end_col_offset": 1,
+          "end_lineno": 18,
+          "lineno": 14,
+          "node_id": 69,
+          "src": "487:25:0"
+        }
+      },
+      {
+        "args": {
+          "args": [
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 12,
+                "end_col_offset": 19,
+                "end_lineno": 21,
+                "id": "uint256",
+                "lineno": 21,
+                "node_id": 80,
+                "src": "536:7:0"
+              },
+              "arg": "i",
+              "ast_type": "arg",
+              "col_offset": 9,
+              "end_col_offset": 19,
+              "end_lineno": 21,
+              "lineno": 21,
+              "node_id": 79,
+              "src": "533:10:0"
+            },
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 24,
+                "end_col_offset": 31,
+                "end_lineno": 21,
+                "id": "uint256",
+                "lineno": 21,
+                "node_id": 83,
+                "src": "548:7:0"
+              },
+              "arg": "j",
+              "ast_type": "arg",
+              "col_offset": 21,
+              "end_col_offset": 31,
+              "end_lineno": 21,
+              "lineno": 21,
+              "node_id": 82,
+              "src": "545:10:0"
+            }
+          ],
+          "ast_type": "arguments",
+          "col_offset": 9,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 31,
+          "end_lineno": 21,
+          "lineno": 21,
+          "node_id": 78,
+          "src": "533:22:0"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "annotation": {
+              "ast_type": "Subscript",
+              "col_offset": 10,
+              "end_col_offset": 20,
+              "end_lineno": 22,
+              "lineno": 22,
+              "node_id": 88,
+              "slice": {
+                "ast_type": "Index",
+                "col_offset": 18,
+                "end_col_offset": 19,
+                "end_lineno": 22,
+                "lineno": 22,
+                "node_id": 91,
+                "src": "576:1:0",
+                "value": {
+                  "ast_type": "Int",
+                  "col_offset": 18,
+                  "end_col_offset": 19,
+                  "end_lineno": 22,
+                  "lineno": 22,
+                  "node_id": 92,
+                  "src": "576:1:0",
+                  "value": 3
+                }
+              },
+              "src": "568:10:0",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 10,
+                "end_col_offset": 17,
+                "end_lineno": 22,
+                "id": "address",
+                "lineno": 22,
+                "node_id": 89,
+                "src": "568:7:0"
+              }
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 2,
+            "end_col_offset": 29,
+            "end_lineno": 22,
+            "lineno": 22,
+            "node_id": 85,
+            "simple": 1,
+            "src": "560:27:0",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 2,
+              "end_col_offset": 8,
+              "end_lineno": 22,
+              "id": "tokens",
+              "lineno": 22,
+              "node_id": 86,
+              "src": "560:6:0"
+            },
+            "value": {
+              "ast_type": "Name",
+              "col_offset": 23,
+              "end_col_offset": 29,
+              "end_lineno": 22,
+              "id": "TOKENS",
+              "lineno": 22,
+              "node_id": 94,
+              "src": "581:6:0"
+            }
+          },
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 7,
+              "end_col_offset": 14,
+              "end_lineno": 23,
+              "id": "uint256",
+              "lineno": 23,
+              "node_id": 99,
+              "src": "595:7:0"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 2,
+            "end_col_offset": 49,
+            "end_lineno": 23,
+            "lineno": 23,
+            "node_id": 96,
+            "simple": 1,
+            "src": "590:47:0",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 2,
+              "end_col_offset": 5,
+              "end_lineno": 23,
+              "id": "bal",
+              "lineno": 23,
+              "node_id": 97,
+              "src": "590:3:0"
+            },
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 44,
+                  "end_col_offset": 48,
+                  "end_lineno": 23,
+                  "id": "self",
+                  "lineno": 23,
+                  "node_id": 114,
+                  "src": "632:4:0"
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 17,
+              "end_col_offset": 49,
+              "end_lineno": 23,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "balanceOf",
+                "col_offset": 17,
+                "end_col_offset": 43,
+                "end_lineno": 23,
+                "lineno": 23,
+                "node_id": 102,
+                "src": "605:26:0",
+                "value": {
+                  "args": [
+                    {
+                      "ast_type": "Subscript",
+                      "col_offset": 23,
+                      "end_col_offset": 32,
+                      "end_lineno": 23,
+                      "lineno": 23,
+                      "node_id": 106,
+                      "slice": {
+                        "ast_type": "Index",
+                        "col_offset": 30,
+                        "end_col_offset": 31,
+                        "end_lineno": 23,
+                        "lineno": 23,
+                        "node_id": 109,
+                        "src": "618:1:0",
+                        "value": {
+                          "ast_type": "Name",
+                          "col_offset": 30,
+                          "end_col_offset": 31,
+                          "end_lineno": 23,
+                          "id": "i",
+                          "lineno": 23,
+                          "node_id": 110,
+                          "src": "618:1:0"
+                        }
+                      },
+                      "src": "611:9:0",
+                      "value": {
+                        "ast_type": "Name",
+                        "col_offset": 23,
+                        "end_col_offset": 29,
+                        "end_lineno": 23,
+                        "id": "tokens",
+                        "lineno": 23,
+                        "node_id": 107,
+                        "src": "611:6:0"
+                      }
+                    }
+                  ],
+                  "ast_type": "Call",
+                  "col_offset": 17,
+                  "end_col_offset": 33,
+                  "end_lineno": 23,
+                  "func": {
+                    "ast_type": "Name",
+                    "col_offset": 17,
+                    "end_col_offset": 22,
+                    "end_lineno": 23,
+                    "id": "ERC20",
+                    "lineno": 23,
+                    "node_id": 104,
+                    "src": "605:5:0"
+                  },
+                  "keyword": null,
+                  "keywords": [],
+                  "lineno": 23,
+                  "node_id": 103,
+                  "src": "605:16:0"
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 23,
+              "node_id": 101,
+              "src": "605:32:0"
+            }
+          },
+          {
+            "ast_type": "Expr",
+            "col_offset": 2,
+            "end_col_offset": 44,
+            "end_lineno": 25,
+            "lineno": 25,
+            "node_id": 116,
+            "src": "641:42:0",
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 27,
+                  "end_col_offset": 38,
+                  "end_lineno": 25,
+                  "id": "STABLE_SWAP",
+                  "lineno": 25,
+                  "node_id": 130,
+                  "src": "666:11:0"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 40,
+                  "end_col_offset": 43,
+                  "end_lineno": 25,
+                  "id": "bal",
+                  "lineno": 25,
+                  "node_id": 132,
+                  "src": "679:3:0"
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 2,
+              "end_col_offset": 44,
+              "end_lineno": 25,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "approve",
+                "col_offset": 2,
+                "end_col_offset": 26,
+                "end_lineno": 25,
+                "lineno": 25,
+                "node_id": 118,
+                "src": "641:24:0",
+                "value": {
+                  "args": [
+                    {
+                      "ast_type": "Subscript",
+                      "col_offset": 8,
+                      "end_col_offset": 17,
+                      "end_lineno": 25,
+                      "lineno": 25,
+                      "node_id": 122,
+                      "slice": {
+                        "ast_type": "Index",
+                        "col_offset": 15,
+                        "end_col_offset": 16,
+                        "end_lineno": 25,
+                        "lineno": 25,
+                        "node_id": 125,
+                        "src": "654:1:0",
+                        "value": {
+                          "ast_type": "Name",
+                          "col_offset": 15,
+                          "end_col_offset": 16,
+                          "end_lineno": 25,
+                          "id": "i",
+                          "lineno": 25,
+                          "node_id": 126,
+                          "src": "654:1:0"
+                        }
+                      },
+                      "src": "647:9:0",
+                      "value": {
+                        "ast_type": "Name",
+                        "col_offset": 8,
+                        "end_col_offset": 14,
+                        "end_lineno": 25,
+                        "id": "tokens",
+                        "lineno": 25,
+                        "node_id": 123,
+                        "src": "647:6:0"
+                      }
+                    }
+                  ],
+                  "ast_type": "Call",
+                  "col_offset": 2,
+                  "end_col_offset": 18,
+                  "end_lineno": 25,
+                  "func": {
+                    "ast_type": "Name",
+                    "col_offset": 2,
+                    "end_col_offset": 7,
+                    "end_lineno": 25,
+                    "id": "ERC20",
+                    "lineno": 25,
+                    "node_id": 120,
+                    "src": "641:5:0"
+                  },
+                  "keyword": null,
+                  "keywords": [],
+                  "lineno": 25,
+                  "node_id": 119,
+                  "src": "641:16:0"
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 25,
+              "node_id": 117,
+              "src": "641:42:0"
+            }
+          },
+          {
+            "ast_type": "Expr",
+            "col_offset": 2,
+            "end_col_offset": 3,
+            "end_lineno": 29,
+            "lineno": 27,
+            "node_id": 134,
+            "src": "687:88:0",
+            "value": {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 12,
+                      "end_col_offset": 13,
+                      "end_lineno": 28,
+                      "id": "i",
+                      "lineno": 28,
+                      "node_id": 146,
+                      "src": "733:1:0"
+                    },
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 15,
+                      "end_col_offset": 21,
+                      "end_lineno": 28,
+                      "id": "int128",
+                      "lineno": 28,
+                      "node_id": 148,
+                      "src": "736:6:0"
+                    }
+                  ],
+                  "ast_type": "Call",
+                  "col_offset": 4,
+                  "end_col_offset": 22,
+                  "end_lineno": 28,
+                  "func": {
+                    "ast_type": "Name",
+                    "col_offset": 4,
+                    "end_col_offset": 11,
+                    "end_lineno": 28,
+                    "id": "convert",
+                    "lineno": 28,
+                    "node_id": 144,
+                    "src": "725:7:0"
+                  },
+                  "keyword": null,
+                  "keywords": [],
+                  "lineno": 28,
+                  "node_id": 143,
+                  "src": "725:18:0"
+                },
+                {
+                  "args": [
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 32,
+                      "end_col_offset": 33,
+                      "end_lineno": 28,
+                      "id": "j",
+                      "lineno": 28,
+                      "node_id": 153,
+                      "src": "753:1:0"
+                    },
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 35,
+                      "end_col_offset": 41,
+                      "end_lineno": 28,
+                      "id": "int128",
+                      "lineno": 28,
+                      "node_id": 155,
+                      "src": "756:6:0"
+                    }
+                  ],
+                  "ast_type": "Call",
+                  "col_offset": 24,
+                  "end_col_offset": 42,
+                  "end_lineno": 28,
+                  "func": {
+                    "ast_type": "Name",
+                    "col_offset": 24,
+                    "end_col_offset": 31,
+                    "end_lineno": 28,
+                    "id": "convert",
+                    "lineno": 28,
+                    "node_id": 151,
+                    "src": "745:7:0"
+                  },
+                  "keyword": null,
+                  "keywords": [],
+                  "lineno": 28,
+                  "node_id": 150,
+                  "src": "745:18:0"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 44,
+                  "end_col_offset": 47,
+                  "end_lineno": 28,
+                  "id": "bal",
+                  "lineno": 28,
+                  "node_id": 157,
+                  "src": "765:3:0"
+                },
+                {
+                  "ast_type": "Int",
+                  "col_offset": 49,
+                  "end_col_offset": 50,
+                  "end_lineno": 28,
+                  "lineno": 28,
+                  "node_id": 159,
+                  "src": "770:1:0",
+                  "value": 1
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 2,
+              "end_col_offset": 3,
+              "end_lineno": 29,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "exchange",
+                "col_offset": 2,
+                "end_col_offset": 34,
+                "end_lineno": 27,
+                "lineno": 27,
+                "node_id": 136,
+                "src": "687:32:0",
+                "value": {
+                  "args": [
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 13,
+                      "end_col_offset": 24,
+                      "end_lineno": 27,
+                      "id": "STABLE_SWAP",
+                      "lineno": 27,
+                      "node_id": 140,
+                      "src": "698:11:0"
+                    }
+                  ],
+                  "ast_type": "Call",
+                  "col_offset": 2,
+                  "end_col_offset": 25,
+                  "end_lineno": 27,
+                  "func": {
+                    "ast_type": "Name",
+                    "col_offset": 2,
+                    "end_col_offset": 12,
+                    "end_lineno": 27,
+                    "id": "StableSwap",
+                    "lineno": 27,
+                    "node_id": 138,
+                    "src": "687:10:0"
+                  },
+                  "keyword": null,
+                  "keywords": [],
+                  "lineno": 27,
+                  "node_id": 137,
+                  "src": "687:23:0"
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 27,
+              "node_id": 135,
+              "src": "687:88:0"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 20,
+            "id": "external",
+            "lineno": 20,
+            "node_id": 160,
+            "src": "515:8:0"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 3,
+        "end_lineno": 29,
+        "lineno": 21,
+        "name": "swap",
+        "node_id": 77,
+        "pos": null,
+        "returns": null,
+        "src": "524:251:0"
+      }
+    ],
+    "col_offset": 0,
+    "doc_string": null,
+    "end_col_offset": 3,
+    "end_lineno": 29,
+    "lineno": 1,
+    "name": "TestCurveExchange.vy",
+    "node_id": 0,
+    "src": "0:775:0"
+  },
+  "legacyAST": {
+    "ast_type": "Module",
+    "body": [
+      {
+        "alias": null,
+        "ast_type": "ImportFrom",
+        "col_offset": 0,
+        "end_col_offset": 34,
+        "end_lineno": 2,
+        "level": 0,
+        "lineno": 2,
+        "module": "vyper.interfaces",
+        "name": "ERC20",
+        "node_id": 1,
+        "src": "16:34:0"
+      },
+      {
+        "ast_type": "InterfaceDef",
+        "body": [
+          {
+            "args": {
+              "args": [
+                {
+                  "annotation": {
+                    "ast_type": "Name",
+                    "col_offset": 18,
+                    "end_col_offset": 24,
+                    "end_lineno": 5,
+                    "id": "int128",
+                    "lineno": 5,
+                    "node_id": 7,
+                    "src": "92:6:0"
+                  },
+                  "arg": "i",
+                  "ast_type": "arg",
+                  "col_offset": 15,
+                  "end_col_offset": 24,
+                  "end_lineno": 5,
+                  "lineno": 5,
+                  "node_id": 6,
+                  "src": "89:9:0"
+                },
+                {
+                  "annotation": {
+                    "ast_type": "Name",
+                    "col_offset": 29,
+                    "end_col_offset": 35,
+                    "end_lineno": 5,
+                    "id": "int128",
+                    "lineno": 5,
+                    "node_id": 10,
+                    "src": "103:6:0"
+                  },
+                  "arg": "j",
+                  "ast_type": "arg",
+                  "col_offset": 26,
+                  "end_col_offset": 35,
+                  "end_lineno": 5,
+                  "lineno": 5,
+                  "node_id": 9,
+                  "src": "100:9:0"
+                },
+                {
+                  "annotation": {
+                    "ast_type": "Name",
+                    "col_offset": 41,
+                    "end_col_offset": 48,
+                    "end_lineno": 5,
+                    "id": "uint256",
+                    "lineno": 5,
+                    "node_id": 13,
+                    "src": "115:7:0"
+                  },
+                  "arg": "dx",
+                  "ast_type": "arg",
+                  "col_offset": 37,
+                  "end_col_offset": 48,
+                  "end_lineno": 5,
+                  "lineno": 5,
+                  "node_id": 12,
+                  "src": "111:11:0"
+                },
+                {
+                  "annotation": {
+                    "ast_type": "Name",
+                    "col_offset": 58,
+                    "end_col_offset": 65,
+                    "end_lineno": 5,
+                    "id": "uint256",
+                    "lineno": 5,
+                    "node_id": 16,
+                    "src": "132:7:0"
+                  },
+                  "arg": "min_dy",
+                  "ast_type": "arg",
+                  "col_offset": 50,
+                  "end_col_offset": 65,
+                  "end_lineno": 5,
+                  "lineno": 5,
+                  "node_id": 15,
+                  "src": "124:15:0"
+                }
+              ],
+              "ast_type": "arguments",
+              "col_offset": 15,
+              "default": null,
+              "defaults": [],
+              "end_col_offset": 65,
+              "end_lineno": 5,
+              "lineno": 5,
+              "node_id": 5,
+              "src": "89:50:0"
+            },
+            "ast_type": "FunctionDef",
+            "body": [
+              {
+                "ast_type": "Expr",
+                "col_offset": 68,
+                "end_col_offset": 78,
+                "end_lineno": 5,
+                "lineno": 5,
+                "node_id": 18,
+                "src": "142:10:0",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 68,
+                  "end_col_offset": 78,
+                  "end_lineno": 5,
+                  "id": "nonpayable",
+                  "lineno": 5,
+                  "node_id": 19,
+                  "src": "142:10:0"
+                }
+              }
+            ],
+            "col_offset": 2,
+            "decorator_list": [],
+            "doc_string": null,
+            "end_col_offset": 78,
+            "end_lineno": 5,
+            "lineno": 5,
+            "name": "exchange",
+            "node_id": 4,
+            "pos": null,
+            "returns": null,
+            "src": "76:76:0"
+          }
+        ],
+        "col_offset": 0,
+        "end_col_offset": 78,
+        "end_lineno": 5,
+        "lineno": 4,
+        "name": "StableSwap",
+        "node_id": 3,
+        "src": "52:100:0"
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 22,
+              "end_col_offset": 29,
+              "end_lineno": 8,
+              "id": "address",
+              "lineno": 8,
+              "node_id": 27,
+              "src": "194:7:0"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 13,
+          "end_col_offset": 30,
+          "end_lineno": 8,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 13,
+            "end_col_offset": 21,
+            "end_lineno": 8,
+            "id": "constant",
+            "lineno": 8,
+            "node_id": 25,
+            "src": "185:8:0"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 8,
+          "node_id": 24,
+          "src": "185:17:0"
+        },
+        "ast_type": "AnnAssign",
+        "col_offset": 0,
+        "end_col_offset": 75,
+        "end_lineno": 8,
+        "lineno": 8,
+        "node_id": 21,
+        "simple": 1,
+        "src": "172:75:0",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 11,
+          "end_lineno": 8,
+          "id": "STABLE_SWAP",
+          "lineno": 8,
+          "node_id": 22,
+          "src": "172:11:0"
+        },
+        "value": {
+          "ast_type": "Hex",
+          "col_offset": 33,
+          "end_col_offset": 75,
+          "end_lineno": 8,
+          "lineno": 8,
+          "node_id": 29,
+          "src": "205:42:0",
+          "value": "0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7"
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 14,
+              "end_col_offset": 21,
+              "end_lineno": 10,
+              "id": "address",
+              "lineno": 10,
+              "node_id": 36,
+              "src": "263:7:0"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 5,
+          "end_col_offset": 22,
+          "end_lineno": 10,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 5,
+            "end_col_offset": 13,
+            "end_lineno": 10,
+            "id": "constant",
+            "lineno": 10,
+            "node_id": 34,
+            "src": "254:8:0"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 10,
+          "node_id": 33,
+          "src": "254:17:0"
+        },
+        "ast_type": "AnnAssign",
+        "col_offset": 0,
+        "end_col_offset": 67,
+        "end_lineno": 10,
+        "lineno": 10,
+        "node_id": 30,
+        "simple": 1,
+        "src": "249:67:0",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 3,
+          "end_lineno": 10,
+          "id": "DAI",
+          "lineno": 10,
+          "node_id": 31,
+          "src": "249:3:0"
+        },
+        "value": {
+          "ast_type": "Hex",
+          "col_offset": 25,
+          "end_col_offset": 67,
+          "end_lineno": 10,
+          "lineno": 10,
+          "node_id": 38,
+          "src": "274:42:0",
+          "value": "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 15,
+              "end_col_offset": 22,
+              "end_lineno": 11,
+              "id": "address",
+              "lineno": 11,
+              "node_id": 45,
+              "src": "332:7:0"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 6,
+          "end_col_offset": 23,
+          "end_lineno": 11,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 6,
+            "end_col_offset": 14,
+            "end_lineno": 11,
+            "id": "constant",
+            "lineno": 11,
+            "node_id": 43,
+            "src": "323:8:0"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 11,
+          "node_id": 42,
+          "src": "323:17:0"
+        },
+        "ast_type": "AnnAssign",
+        "col_offset": 0,
+        "end_col_offset": 68,
+        "end_lineno": 11,
+        "lineno": 11,
+        "node_id": 39,
+        "simple": 1,
+        "src": "317:68:0",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 4,
+          "end_lineno": 11,
+          "id": "USDC",
+          "lineno": 11,
+          "node_id": 40,
+          "src": "317:4:0"
+        },
+        "value": {
+          "ast_type": "Hex",
+          "col_offset": 26,
+          "end_col_offset": 68,
+          "end_lineno": 11,
+          "lineno": 11,
+          "node_id": 47,
+          "src": "343:42:0",
+          "value": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 15,
+              "end_col_offset": 22,
+              "end_lineno": 12,
+              "id": "address",
+              "lineno": 12,
+              "node_id": 54,
+              "src": "401:7:0"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 6,
+          "end_col_offset": 23,
+          "end_lineno": 12,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 6,
+            "end_col_offset": 14,
+            "end_lineno": 12,
+            "id": "constant",
+            "lineno": 12,
+            "node_id": 52,
+            "src": "392:8:0"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 12,
+          "node_id": 51,
+          "src": "392:17:0"
+        },
+        "ast_type": "AnnAssign",
+        "col_offset": 0,
+        "end_col_offset": 68,
+        "end_lineno": 12,
+        "lineno": 12,
+        "node_id": 48,
+        "simple": 1,
+        "src": "386:68:0",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 4,
+          "end_lineno": 12,
+          "id": "USDT",
+          "lineno": 12,
+          "node_id": 49,
+          "src": "386:4:0"
+        },
+        "value": {
+          "ast_type": "Hex",
+          "col_offset": 26,
+          "end_col_offset": 68,
+          "end_lineno": 12,
+          "lineno": 12,
+          "node_id": 56,
+          "src": "412:42:0",
+          "value": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Subscript",
+              "col_offset": 17,
+              "end_col_offset": 27,
+              "end_lineno": 14,
+              "lineno": 14,
+              "node_id": 63,
+              "slice": {
+                "ast_type": "Index",
+                "col_offset": 25,
+                "end_col_offset": 26,
+                "end_lineno": 14,
+                "lineno": 14,
+                "node_id": 66,
+                "src": "481:1:0",
+                "value": {
+                  "ast_type": "Int",
+                  "col_offset": 25,
+                  "end_col_offset": 26,
+                  "end_lineno": 14,
+                  "lineno": 14,
+                  "node_id": 67,
+                  "src": "481:1:0",
+                  "value": 3
+                }
+              },
+              "src": "473:10:0",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 17,
+                "end_col_offset": 24,
+                "end_lineno": 14,
+                "id": "address",
+                "lineno": 14,
+                "node_id": 64,
+                "src": "473:7:0"
+              }
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 8,
+          "end_col_offset": 28,
+          "end_lineno": 14,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 8,
+            "end_col_offset": 16,
+            "end_lineno": 14,
+            "id": "constant",
+            "lineno": 14,
+            "node_id": 61,
+            "src": "464:8:0"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 14,
+          "node_id": 60,
+          "src": "464:20:0"
+        },
+        "ast_type": "AnnAssign",
+        "col_offset": 0,
+        "end_col_offset": 1,
+        "end_lineno": 18,
+        "lineno": 14,
+        "node_id": 57,
+        "simple": 1,
+        "src": "456:56:0",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 6,
+          "end_lineno": 14,
+          "id": "TOKENS",
+          "lineno": 14,
+          "node_id": 58,
+          "src": "456:6:0"
+        },
+        "value": {
+          "ast_type": "List",
+          "col_offset": 31,
+          "elements": [
+            {
+              "ast_type": "Name",
+              "col_offset": 2,
+              "end_col_offset": 5,
+              "end_lineno": 15,
+              "id": "DAI",
+              "lineno": 15,
+              "node_id": 70,
+              "src": "491:3:0"
+            },
+            {
+              "ast_type": "Name",
+              "col_offset": 2,
+              "end_col_offset": 6,
+              "end_lineno": 16,
+              "id": "USDC",
+              "lineno": 16,
+              "node_id": 72,
+              "src": "498:4:0"
+            },
+            {
+              "ast_type": "Name",
+              "col_offset": 2,
+              "end_col_offset": 6,
+              "end_lineno": 17,
+              "id": "USDT",
+              "lineno": 17,
+              "node_id": 74,
+              "src": "506:4:0"
+            }
+          ],
+          "end_col_offset": 1,
+          "end_lineno": 18,
+          "lineno": 14,
+          "node_id": 69,
+          "src": "487:25:0"
+        }
+      },
+      {
+        "args": {
+          "args": [
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 12,
+                "end_col_offset": 19,
+                "end_lineno": 21,
+                "id": "uint256",
+                "lineno": 21,
+                "node_id": 80,
+                "src": "536:7:0"
+              },
+              "arg": "i",
+              "ast_type": "arg",
+              "col_offset": 9,
+              "end_col_offset": 19,
+              "end_lineno": 21,
+              "lineno": 21,
+              "node_id": 79,
+              "src": "533:10:0"
+            },
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 24,
+                "end_col_offset": 31,
+                "end_lineno": 21,
+                "id": "uint256",
+                "lineno": 21,
+                "node_id": 83,
+                "src": "548:7:0"
+              },
+              "arg": "j",
+              "ast_type": "arg",
+              "col_offset": 21,
+              "end_col_offset": 31,
+              "end_lineno": 21,
+              "lineno": 21,
+              "node_id": 82,
+              "src": "545:10:0"
+            }
+          ],
+          "ast_type": "arguments",
+          "col_offset": 9,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 31,
+          "end_lineno": 21,
+          "lineno": 21,
+          "node_id": 78,
+          "src": "533:22:0"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "annotation": {
+              "ast_type": "Subscript",
+              "col_offset": 10,
+              "end_col_offset": 20,
+              "end_lineno": 22,
+              "lineno": 22,
+              "node_id": 88,
+              "slice": {
+                "ast_type": "Index",
+                "col_offset": 18,
+                "end_col_offset": 19,
+                "end_lineno": 22,
+                "lineno": 22,
+                "node_id": 91,
+                "src": "576:1:0",
+                "value": {
+                  "ast_type": "Int",
+                  "col_offset": 18,
+                  "end_col_offset": 19,
+                  "end_lineno": 22,
+                  "lineno": 22,
+                  "node_id": 92,
+                  "src": "576:1:0",
+                  "value": 3
+                }
+              },
+              "src": "568:10:0",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 10,
+                "end_col_offset": 17,
+                "end_lineno": 22,
+                "id": "address",
+                "lineno": 22,
+                "node_id": 89,
+                "src": "568:7:0"
+              }
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 2,
+            "end_col_offset": 29,
+            "end_lineno": 22,
+            "lineno": 22,
+            "node_id": 85,
+            "simple": 1,
+            "src": "560:27:0",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 2,
+              "end_col_offset": 8,
+              "end_lineno": 22,
+              "id": "tokens",
+              "lineno": 22,
+              "node_id": 86,
+              "src": "560:6:0"
+            },
+            "value": {
+              "ast_type": "Name",
+              "col_offset": 23,
+              "end_col_offset": 29,
+              "end_lineno": 22,
+              "id": "TOKENS",
+              "lineno": 22,
+              "node_id": 94,
+              "src": "581:6:0"
+            }
+          },
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 7,
+              "end_col_offset": 14,
+              "end_lineno": 23,
+              "id": "uint256",
+              "lineno": 23,
+              "node_id": 99,
+              "src": "595:7:0"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 2,
+            "end_col_offset": 49,
+            "end_lineno": 23,
+            "lineno": 23,
+            "node_id": 96,
+            "simple": 1,
+            "src": "590:47:0",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 2,
+              "end_col_offset": 5,
+              "end_lineno": 23,
+              "id": "bal",
+              "lineno": 23,
+              "node_id": 97,
+              "src": "590:3:0"
+            },
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 44,
+                  "end_col_offset": 48,
+                  "end_lineno": 23,
+                  "id": "self",
+                  "lineno": 23,
+                  "node_id": 114,
+                  "src": "632:4:0"
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 17,
+              "end_col_offset": 49,
+              "end_lineno": 23,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "balanceOf",
+                "col_offset": 17,
+                "end_col_offset": 43,
+                "end_lineno": 23,
+                "lineno": 23,
+                "node_id": 102,
+                "src": "605:26:0",
+                "value": {
+                  "args": [
+                    {
+                      "ast_type": "Subscript",
+                      "col_offset": 23,
+                      "end_col_offset": 32,
+                      "end_lineno": 23,
+                      "lineno": 23,
+                      "node_id": 106,
+                      "slice": {
+                        "ast_type": "Index",
+                        "col_offset": 30,
+                        "end_col_offset": 31,
+                        "end_lineno": 23,
+                        "lineno": 23,
+                        "node_id": 109,
+                        "src": "618:1:0",
+                        "value": {
+                          "ast_type": "Name",
+                          "col_offset": 30,
+                          "end_col_offset": 31,
+                          "end_lineno": 23,
+                          "id": "i",
+                          "lineno": 23,
+                          "node_id": 110,
+                          "src": "618:1:0"
+                        }
+                      },
+                      "src": "611:9:0",
+                      "value": {
+                        "ast_type": "Name",
+                        "col_offset": 23,
+                        "end_col_offset": 29,
+                        "end_lineno": 23,
+                        "id": "tokens",
+                        "lineno": 23,
+                        "node_id": 107,
+                        "src": "611:6:0"
+                      }
+                    }
+                  ],
+                  "ast_type": "Call",
+                  "col_offset": 17,
+                  "end_col_offset": 33,
+                  "end_lineno": 23,
+                  "func": {
+                    "ast_type": "Name",
+                    "col_offset": 17,
+                    "end_col_offset": 22,
+                    "end_lineno": 23,
+                    "id": "ERC20",
+                    "lineno": 23,
+                    "node_id": 104,
+                    "src": "605:5:0"
+                  },
+                  "keyword": null,
+                  "keywords": [],
+                  "lineno": 23,
+                  "node_id": 103,
+                  "src": "605:16:0"
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 23,
+              "node_id": 101,
+              "src": "605:32:0"
+            }
+          },
+          {
+            "ast_type": "Expr",
+            "col_offset": 2,
+            "end_col_offset": 44,
+            "end_lineno": 25,
+            "lineno": 25,
+            "node_id": 116,
+            "src": "641:42:0",
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 27,
+                  "end_col_offset": 38,
+                  "end_lineno": 25,
+                  "id": "STABLE_SWAP",
+                  "lineno": 25,
+                  "node_id": 130,
+                  "src": "666:11:0"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 40,
+                  "end_col_offset": 43,
+                  "end_lineno": 25,
+                  "id": "bal",
+                  "lineno": 25,
+                  "node_id": 132,
+                  "src": "679:3:0"
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 2,
+              "end_col_offset": 44,
+              "end_lineno": 25,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "approve",
+                "col_offset": 2,
+                "end_col_offset": 26,
+                "end_lineno": 25,
+                "lineno": 25,
+                "node_id": 118,
+                "src": "641:24:0",
+                "value": {
+                  "args": [
+                    {
+                      "ast_type": "Subscript",
+                      "col_offset": 8,
+                      "end_col_offset": 17,
+                      "end_lineno": 25,
+                      "lineno": 25,
+                      "node_id": 122,
+                      "slice": {
+                        "ast_type": "Index",
+                        "col_offset": 15,
+                        "end_col_offset": 16,
+                        "end_lineno": 25,
+                        "lineno": 25,
+                        "node_id": 125,
+                        "src": "654:1:0",
+                        "value": {
+                          "ast_type": "Name",
+                          "col_offset": 15,
+                          "end_col_offset": 16,
+                          "end_lineno": 25,
+                          "id": "i",
+                          "lineno": 25,
+                          "node_id": 126,
+                          "src": "654:1:0"
+                        }
+                      },
+                      "src": "647:9:0",
+                      "value": {
+                        "ast_type": "Name",
+                        "col_offset": 8,
+                        "end_col_offset": 14,
+                        "end_lineno": 25,
+                        "id": "tokens",
+                        "lineno": 25,
+                        "node_id": 123,
+                        "src": "647:6:0"
+                      }
+                    }
+                  ],
+                  "ast_type": "Call",
+                  "col_offset": 2,
+                  "end_col_offset": 18,
+                  "end_lineno": 25,
+                  "func": {
+                    "ast_type": "Name",
+                    "col_offset": 2,
+                    "end_col_offset": 7,
+                    "end_lineno": 25,
+                    "id": "ERC20",
+                    "lineno": 25,
+                    "node_id": 120,
+                    "src": "641:5:0"
+                  },
+                  "keyword": null,
+                  "keywords": [],
+                  "lineno": 25,
+                  "node_id": 119,
+                  "src": "641:16:0"
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 25,
+              "node_id": 117,
+              "src": "641:42:0"
+            }
+          },
+          {
+            "ast_type": "Expr",
+            "col_offset": 2,
+            "end_col_offset": 3,
+            "end_lineno": 29,
+            "lineno": 27,
+            "node_id": 134,
+            "src": "687:88:0",
+            "value": {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 12,
+                      "end_col_offset": 13,
+                      "end_lineno": 28,
+                      "id": "i",
+                      "lineno": 28,
+                      "node_id": 146,
+                      "src": "733:1:0"
+                    },
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 15,
+                      "end_col_offset": 21,
+                      "end_lineno": 28,
+                      "id": "int128",
+                      "lineno": 28,
+                      "node_id": 148,
+                      "src": "736:6:0"
+                    }
+                  ],
+                  "ast_type": "Call",
+                  "col_offset": 4,
+                  "end_col_offset": 22,
+                  "end_lineno": 28,
+                  "func": {
+                    "ast_type": "Name",
+                    "col_offset": 4,
+                    "end_col_offset": 11,
+                    "end_lineno": 28,
+                    "id": "convert",
+                    "lineno": 28,
+                    "node_id": 144,
+                    "src": "725:7:0"
+                  },
+                  "keyword": null,
+                  "keywords": [],
+                  "lineno": 28,
+                  "node_id": 143,
+                  "src": "725:18:0"
+                },
+                {
+                  "args": [
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 32,
+                      "end_col_offset": 33,
+                      "end_lineno": 28,
+                      "id": "j",
+                      "lineno": 28,
+                      "node_id": 153,
+                      "src": "753:1:0"
+                    },
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 35,
+                      "end_col_offset": 41,
+                      "end_lineno": 28,
+                      "id": "int128",
+                      "lineno": 28,
+                      "node_id": 155,
+                      "src": "756:6:0"
+                    }
+                  ],
+                  "ast_type": "Call",
+                  "col_offset": 24,
+                  "end_col_offset": 42,
+                  "end_lineno": 28,
+                  "func": {
+                    "ast_type": "Name",
+                    "col_offset": 24,
+                    "end_col_offset": 31,
+                    "end_lineno": 28,
+                    "id": "convert",
+                    "lineno": 28,
+                    "node_id": 151,
+                    "src": "745:7:0"
+                  },
+                  "keyword": null,
+                  "keywords": [],
+                  "lineno": 28,
+                  "node_id": 150,
+                  "src": "745:18:0"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 44,
+                  "end_col_offset": 47,
+                  "end_lineno": 28,
+                  "id": "bal",
+                  "lineno": 28,
+                  "node_id": 157,
+                  "src": "765:3:0"
+                },
+                {
+                  "ast_type": "Int",
+                  "col_offset": 49,
+                  "end_col_offset": 50,
+                  "end_lineno": 28,
+                  "lineno": 28,
+                  "node_id": 159,
+                  "src": "770:1:0",
+                  "value": 1
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 2,
+              "end_col_offset": 3,
+              "end_lineno": 29,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "exchange",
+                "col_offset": 2,
+                "end_col_offset": 34,
+                "end_lineno": 27,
+                "lineno": 27,
+                "node_id": 136,
+                "src": "687:32:0",
+                "value": {
+                  "args": [
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 13,
+                      "end_col_offset": 24,
+                      "end_lineno": 27,
+                      "id": "STABLE_SWAP",
+                      "lineno": 27,
+                      "node_id": 140,
+                      "src": "698:11:0"
+                    }
+                  ],
+                  "ast_type": "Call",
+                  "col_offset": 2,
+                  "end_col_offset": 25,
+                  "end_lineno": 27,
+                  "func": {
+                    "ast_type": "Name",
+                    "col_offset": 2,
+                    "end_col_offset": 12,
+                    "end_lineno": 27,
+                    "id": "StableSwap",
+                    "lineno": 27,
+                    "node_id": 138,
+                    "src": "687:10:0"
+                  },
+                  "keyword": null,
+                  "keywords": [],
+                  "lineno": 27,
+                  "node_id": 137,
+                  "src": "687:23:0"
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 27,
+              "node_id": 135,
+              "src": "687:88:0"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 20,
+            "id": "external",
+            "lineno": 20,
+            "node_id": 160,
+            "src": "515:8:0"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 3,
+        "end_lineno": 29,
+        "lineno": 21,
+        "name": "swap",
+        "node_id": 77,
+        "pos": null,
+        "returns": null,
+        "src": "524:251:0"
+      }
+    ],
+    "col_offset": 0,
+    "doc_string": null,
+    "end_col_offset": 3,
+    "end_lineno": 29,
+    "lineno": 1,
+    "name": "TestCurveExchange.vy",
+    "node_id": 0,
+    "src": "0:775:0"
+  },
+  "compiler": {
+    "name": "vyper",
+    "version": "0.2.16+commit.59e1bdd"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-10-23T17:57:04.985Z",
+  "devdoc": {},
+  "userdoc": {}
+}

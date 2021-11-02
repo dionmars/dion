@@ -17,7 +17,7 @@ venv\Scripts\activate
 pip install vyper
 
 ```
-C:\Users\23470\Desktop\uniswap\env\Lib\site-packages\venv\Scripts>activate
+
 ### To run
 
 ```
@@ -101,31 +101,3 @@ new BN(10).pow(new BN)).mul(new BN(1000000)); //1,000,00 DAI
 
 
 
-
-WEB3_INFURA_PROJECT_ID=7b90f2a34ad841a18c0c79a59179125e 
-DAI_WHALE=0xBE0eB53F46cd790Cd13851d5EFf43D12404d33E8
-USDC_WHALE=0xBE0eB53F46cd790Cd13851d5EFf43D12404d33E8
-USDT_WHALE=0xBE0eB53F46cd790Cd13851d5EFf43D12404d33E8
-WETH_WHALE=0x28C6c06298d514Db089934071355E5743bf21d60 
-WBTC_WHALE=0xBE0eB53F46cd790Cd13851d5EFf43D12404d33E8
-
-0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE
-
-
-Bank name:
-Bank of America
-
-Bank address:
-100 North Tryon Street Charlotte, North Carolina 28202, USA
-
-Routing (ABA):
-061000052
-
-Account number:
-00003502413140556
-
-Account type:
-CHECKING
-
-Beneficiary name:
-Johnson Christopher
